@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resultados — ReceitaFácil</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="pagina-interna">
+
+    <header class="header">
+      <span class="logo">ReceitaFácil</span>
+      <nav>
+        <a href="principal.html">Início</a>
+        <a href="buscar-receita.html" class="ativo">Buscar receita</a>
+        <a href="minhas-receitas.html">Minhas receitas</a>
+        <a href="login.html">Sair</a>
+      </nav>
+    </header>
+
+    <main class="conteudo">
+      <div style="margin-bottom: 1.5rem;">
+        <a href="buscar-receita.html" style="font-size: 0.88rem; color: var(--texto-suave);">
+          ← Voltar aos ingredientes
+        </a>
+      </div>
+
+      <h1>Receitas encontradas</h1>
+      <p id="subtitulo-resultados">Mostrando receitas com base nos seus ingredientes</p>
+
+      <div id="mensagem-vazia" class="ingredientes-vazio" style="display: none; margin-top: 1.5rem;">
+        Nenhuma receita encontrada com os ingredientes informados.<br />
+        Tente adicionar mais ingredientes ou remover alguma restrição.
+      </div>
+
+      <ul class="lista-receitas" id="lista-resultados" style="margin-top: 1.5rem;">
+
+        <!-- Exemplo de itens de resultado (simulado) -->
+        <li class="item-receita">
+          <a href="receita.html">Bolo de banana simples</a>
+          <span class="tag-match">✓ Match perfeito</span>
+          <span class="icone-fav" title="Salvar nos favoritos">☆</span>
+        </li>
+
+        <li class="item-receita">
+          <a href="receita.html">Panqueca de aveia</a>
+          <span class="icone-fav" title="Salvar nos favoritos">☆</span>
+        </li>
+
+        <li class="item-receita">
+          <a href="receita.html">Vitamina de frutas</a>
+          <span class="icone-fav" title="Salvar nos favoritos">☆</span>
+        </li>
+
+        <li class="item-receita">
+          <a href="receita.html">Omelete com legumes</a>
+          <span class="icone-fav" title="Salvar nos favoritos">☆</span>
+        </li>
+
+      </ul>
+    </main>
+
+  </div>
+
+</body>
+</html>

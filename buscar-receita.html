@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buscar Receita — ReceitaFácil</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="pagina-interna">
+
+    <header class="header">
+      <span class="logo">ReceitaFácil</span>
+      <nav>
+        <a href="principal.html">Início</a>
+        <a href="buscar-receita.html" class="ativo">Buscar receita</a>
+        <a href="minhas-receitas.html">Minhas receitas</a>
+        <a href="login.html">Sair</a>
+      </nav>
+    </header>
+
+    <main class="conteudo">
+      <h1>Buscar receita</h1>
+      <p>Adicione os ingredientes que você tem em casa e a quantidade disponível.</p>
+
+      <div class="card" style="margin-top: 1.5rem;">
+
+        <!-- Formulário de adição de ingrediente -->
+        <h2 style="margin-bottom: 1rem; font-size: 1.1rem;">Adicionar ingrediente</h2>
+
+        <div class="form-ingrediente" id="form-add">
+          <div class="form-grupo" style="margin-bottom: 0;">
+            <label for="ing-nome">Ingrediente</label>
+            <input type="text" id="ing-nome" placeholder="Ex: farinha de trigo" />
+          </div>
+          <div class="form-grupo" style="margin-bottom: 0;">
+            <label for="ing-qtd">Quantidade</label>
+            <input type="text" id="ing-qtd" placeholder="Ex: 500g" />
+          </div>
+          <div class="form-grupo" style="margin-bottom: 0;">
+            <label for="ing-val">Validade</label>
+            <input type="month" id="ing-val"/>
+          </div>
+          <button class="btn btn-secundario">+ Adicionar</button>
+        </div>
+
+        <div id="erro-add" class="mensagem-erro" style="display: none;"></div>
+
+        <hr class="divisor" />
+
+        <!-- Lista de ingredientes -->
+        <h2 style="margin-bottom: 0.75rem; font-size: 1.1rem;">Meus ingredientes</h2>
+
+        <ul class="lista-ingredientes" id="lista-ingredientes">
+          <li class="item-ingrediente">
+            <span class="nome-ing">Farinha de trigo</span>
+            <span class="qtd-ing">500g</span>
+            <span class="val-ing">Val: 06/2026</span>
+            <div class="acoes">
+              <button class="btn-icone" title="Editar">✏️</button>
+              <button class="btn-icone" title="Remover">🗑️</button>
+            </div>
+          </li>
+          <li class="item-ingrediente">
+            <span class="nome-ing">Banana madura</span>
+            <span class="qtd-ing">3 unid.</span>
+            <span class="val-ing" style="visibility: hidden;">—</span>
+            <div class="acoes">
+              <button class="btn-icone" title="Editar">✏️</button>
+              <button class="btn-icone" title="Remover">🗑️</button>
+            </div>
+          </li>
+        </ul>
+
+        <div class="ingredientes-vazio" id="vazio" style="display: none;">
+          Nenhum ingrediente adicionado ainda.<br />
+          Adicione itens acima para buscar receitas.
+        </div>
+
+        <div id="secao-buscar" style="margin-top: 1rem;">
+          <a href="resultados.html" class="btn btn-primario">Buscar receitas com esses ingredientes</a>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>

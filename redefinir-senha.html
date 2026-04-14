@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redefinir Senha — ReceitaFácil</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="pagina-centrada">
+    <div class="card-estreito">
+
+      <div class="card-titulo">
+        <h1>Redefinir senha</h1>
+        <p>Informe seu e-mail e enviaremos um link para redefinição</p>
+      </div>
+
+      <!-- Exibir após envio bem-sucedido: -->
+      <!-- <div class="mensagem-sucesso">E-mail enviado! Verifique sua caixa de entrada.</div> -->
+
+      <form action="login.html" method="get">
+        <div class="form-grupo">
+          <label for="email">E-mail cadastrado</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="seu@email.com"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primario">Enviar link de redefinição</button>
+      </form>
+
+      <div class="links-form">
+        <a href="login.html">Voltar ao login</a>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minhas Receitas — ReceitaFácil</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="pagina-interna">
+
+    <header class="header">
+      <span class="logo">ReceitaFácil</span>
+      <nav>
+        <a href="principal.html">Início</a>
+        <a href="buscar-receita.html">Buscar receita</a>
+        <a href="minhas-receitas.html" class="ativo">Minhas receitas</a>
+        <a href="login.html">Sair</a>
+      </nav>
+    </header>
+
+    <main class="conteudo">
+      <h1>Minhas receitas</h1>
+      <p>Suas receitas favoritas salvas para acesso rápido.</p>
+
+      <!-- Quando não houver favoritos, exibir este bloco: -->
+      <div class="ingredientes-vazio" id="vazio-favoritos" style="display: none; margin-top: 1.5rem;">
+        Você ainda não salvou nenhuma receita como favorita.<br />
+        <a href="buscar-receita.html">Buscar receitas</a> e marque as que gostar!
+      </div>
+
+      <ul class="receitas-favoritas-lista" id="lista-favoritos" style="margin-top: 1.5rem;">
+
+        <!-- Exemplo de receitas favoritas (simulado) -->
+        <li>
+          <span>⭐</span>
+          <a href="receita.html">Bolo de banana simples</a>
+          <button class="remover-fav" title="Remover dos favoritos">✕</button>
+        </li>
+
+        <li>
+          <span>⭐</span>
+          <a href="receita.html">Omelete com legumes</a>
+          <button class="remover-fav" title="Remover dos favoritos">✕</button>
+        </li>
+
+        <li>
+          <span>⭐</span>
+          <a href="receita.html">Vitamina de frutas</a>
+          <button class="remover-fav" title="Remover dos favoritos">✕</button>
+        </li>
+
+      </ul>
+    </main>
+
+  </div>
+
+</body>
+</html>

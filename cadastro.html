@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criar Conta — ReceitaFácil</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="pagina-centrada">
+    <div class="card-estreito">
+
+      <div class="card-titulo">
+        <h1>Criar conta</h1>
+        <p>Preencha os dados abaixo para se cadastrar</p>
+      </div>
+
+      <!-- <div class="mensagem-erro">Este nickname já está em uso.</div> -->
+
+      <form action="login.html" method="get">
+        <div class="form-grupo">
+          <label for="nickname">Nickname</label>
+          <input
+            type="text"
+            id="nickname"
+            name="nickname"
+            placeholder="Ex: Jacquin"
+            autocomplete="username"
+            required
+          />
+        </div>
+
+        <div class="form-grupo">
+          <label for="email">E-mail</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="seu@email.com"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <div class="form-grupo">
+          <label for="senha">Senha</label>
+          <input
+            type="password"
+            id="senha"
+            name="senha"
+            placeholder="Mínimo 6 caracteres"
+            autocomplete="new-password"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primario">Criar conta</button>
+      </form>
+
+      <div class="links-form">
+        <span>Já tem uma conta? <a href="login.html">Fazer login</a></span>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
