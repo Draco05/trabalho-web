@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Receita — ReceitaFácil</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <div class="pagina-interna">
 
     <header class="header">
-      <span class="logo">ReceitaFácil</span>
-      <nav>
-        <a href="principal.html">Início</a>
-        <a href="buscar-receita.html">Buscar receita</a>
-        <a href="minhas-receitas.html">Minhas receitas</a>
-        <a href="login.html">Sair</a>
+      <a href="principal.html" class="logo">
+       <img src="imgs/hat-chef-svgrepo-com.svg" class="logo-icon">
+        <span class="logo-name">ReceitaFácil</span>
+      </a>
+      <nav class="header-nav" aria-label="Navegação principal">
+        <a href="principal.html" class="header-link">Início</a>
+        <a href="buscar-receita.html" class="header-link">Buscar receita</a>
+        <a href="minhas-receitas.html" class="header-link">Minhas receitas</a>
+        <a href="login.html" class="btn-sair">Sair</a>
       </nav>
     </header>
 
@@ -32,33 +37,28 @@
 
         <!-- Imagem do prato (src preenchido pelo back-end) -->
         <img class="receita-imagem" src="imgs/Petit-gateau.jpg" alt="Foto do petit gateau" />
-        
+
         <div class="receita-info">
           <h1>Petit Gateu</h1>
           <p>Uma sobremesa deliciosa para acompanhar um sorvete.</p>
 
-          <button
-            class="btn btn-secundario btn-pequeno"
-            id="btn-favorito"
-            style="width: auto; margin-bottom: 1rem;"
-          >
-            ☆ Salvar nos favoritos
+          <button class="btn btn-secundario btn-pequeno" id="btn-favorito" style="width: auto; margin-bottom: 1rem;">
+            <img src="imgs/star-svgrepo-com.svg">
+            Salvar nos favoritos
           </button>
 
-          <h2 style="font-size: 1rem; margin-bottom: 0.5rem;">Ingredientes</h2>
           <ul class="receita-ingredientes">
-            <li>Chocolate Amargo <span>200g</span></li>
-            <li>Farinha de trigo <span>2 colheres de sopa</span></li>
-            <li>Açúcar <span>1/4 de xícara</span></li>
-            <li>Ovos <span>2 unidades</span></li>
-            <li>Gemas<span>2 unidades</span></li>
-            <li>Manteiga sem sal <span>2 colheres de sopa</span></li>
+            <li><span>Chocolate Amargo</span><strong>200g</strong></li>
+            <li><span>Farinha de trigo</span><strong>2 colheres de sopa</strong></li>
+            <li><span>Açúcar</span><strong>1/4 de xícara</strong></li>
+            <li><span>Ovos</span><strong>2 unidades</strong></li>
+            <li><span>Gemas</span><strong>2 unidades</strong></li>
+            <li><span>Manteiga sem sal</span><strong>2 colheres de sopa</strong></li>
           </ul>
-        </div>
 
+        </div>
       </div>
 
-      <!-- Modo de preparo -->
       <div class="card receita-preparo">
         <h2>Modo de preparo</h2>
         <ol>
@@ -66,7 +66,8 @@
           <li>Bata os ovos e as gemas com açúcar na batedeira, até ficar bem claro.</li>
           <li>Junte o chocolate derretido e a farinha de trigo, misturando com uma espátula.</li>
           <li>Depois, unte as forminhas de empadinha, passe farinha de trigo e coloque a massa.</li>
-          <li>Preaqueça o forno e leve para assar de 6 a 10 minutos (em fogo alto) até os bolinhos crescerem, mas o meio deve ficar molinho.</li>
+          <li>Preaqueça o forno e leve para assar de 6 a 10 minutos (em fogo alto) até os bolinhos crescerem, mas o meio
+            deve ficar molinho.</li>
           <li>Deve-se desenformar ainda quente.</li>
           <li>Sirva diretamente no prato, acompanhado com sorvete de creme.</li>
         </ol>
@@ -75,7 +76,6 @@
     </main>
 
   </div>
-
-
 </body>
+
 </html>

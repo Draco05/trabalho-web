@@ -10,12 +10,15 @@
   <div class="pagina-interna">
 
     <header class="header">
-      <span class="logo">ReceitaFácil</span>
-      <nav>
-        <a href="principal.html">Início</a>
-        <a href="buscar-receita.html" class="ativo">Buscar receita</a>
-        <a href="minhas-receitas.html">Minhas receitas</a>
-        <a href="login.html">Sair</a>
+      <a href="principal.html" class="logo">
+        <img src="imgs/hat-chef-svgrepo-com.svg" class="logo-icon">
+        <span class="logo-name">ReceitaFácil</span>
+      </a>
+      <nav class="header-nav" aria-label="Navegação principal">
+        <a href="principal.html" class="header-link">Início</a>
+        <a href="buscar-receita.html" class="header-link">Buscar receita</a>
+        <a href="minhas-receitas.html" class="header-link">Minhas receitas</a>
+        <a href="login.html" class="btn-sair">Sair</a>
       </nav>
     </header>
 
@@ -57,8 +60,17 @@
             <span class="qtd-ing">500g</span>
             <span class="val-ing">Val: 06/2026</span>
             <div class="acoes">
-              <button class="btn-icone" title="Editar">✏️</button>
-              <button class="btn-icone" title="Remover">🗑️</button>
+              <button class="btn-icone" title="Editar"><img src="imgs/edit-3-svgrepo-com.svg"></button>
+              <button class="btn-icone remover-fav" title="Remover">✕</button>
+            </div>
+          </li>
+          <li class="item-ingrediente">
+            <span class="nome-ing">Chocolate</span>
+            <span class="qtd-ing">200g</span>
+            <span class="val-ing">Val: 12/2026</span>
+            <div class="acoes">
+              <button class="btn-icone" title="Editar"><img src="imgs/edit-3-svgrepo-com.svg"></button>
+              <button class="btn-icone remover-fav" title="Remover">✕</button>
             </div>
           </li>
           <li class="item-ingrediente">
@@ -66,10 +78,11 @@
             <span class="qtd-ing">3 unid.</span>
             <span class="val-ing" style="visibility: hidden;">—</span>
             <div class="acoes">
-              <button class="btn-icone" title="Editar">✏️</button>
-              <button class="btn-icone" title="Remover">🗑️</button>
+              <button class="btn-icone" title="Editar"><img src="imgs/edit-3-svgrepo-com.svg"></button>
+              <button class="btn-icone remover-fav" title="Remover">✕</button>
             </div>
           </li>
+          
         </ul>
 
         <div class="ingredientes-vazio" id="vazio" style="display: none;">

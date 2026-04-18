@@ -10,12 +10,15 @@
   <div class="pagina-interna">
 
     <header class="header">
-      <span class="logo">ReceitaFácil</span>
-      <nav>
-        <a href="principal.html">Início</a>
-        <a href="buscar-receita.html">Buscar receita</a>
-        <a href="minhas-receitas.html" class="ativo">Minhas receitas</a>
-        <a href="login.html">Sair</a>
+      <a href="principal.html" class="logo">
+        <img src="imgs/hat-chef-svgrepo-com.svg" class="logo-icon">
+        <span class="logo-name">ReceitaFácil</span>
+      </a>
+      <nav class="header-nav" aria-label="Navegação principal">
+        <a href="principal.html" class="header-link">Início</a>
+        <a href="buscar-receita.html" class="header-link">Buscar receita</a>
+        <a href="minhas-receitas.html" class="header-link">Minhas receitas</a>
+        <a href="login.html" class="btn-sair">Sair</a>
       </nav>
     </header>
 
@@ -31,22 +34,31 @@
 
       <ul class="receitas-favoritas-lista" id="lista-favoritos" style="margin-top: 1.5rem;">
 
-        <!-- Exemplo de receitas favoritas (simulado) -->
         <li>
-          <span>⭐</span>
-          <a href="receita.html">Petit Gateau</a>
+          <div style="flex: 1;">
+            <a href="receita.html">Petit Gateau</a>
+          </div>
           <button class="remover-fav" title="Remover dos favoritos">✕</button>
         </li>
 
         <li>
-          <span>⭐</span>
-          <a href="receita.html">Omelete com legumes</a>
+          <div style="flex: 1;">
+            <a href="receita.html">Lasanha à bolonhesa</a>
+          </div>
           <button class="remover-fav" title="Remover dos favoritos">✕</button>
         </li>
 
         <li>
-          <span>⭐</span>
-          <a href="receita.html">Vitamina de frutas</a>
+          <div style="flex: 1;">
+            <a href="receita.html">Strogonoff de Carne</a>
+          </div>
+          <button class="remover-fav" title="Remover dos favoritos">✕</button>
+        </li>
+
+        <li>
+          <div style="flex: 1;">
+            <a href="receita.html">Hamburguer à pizzaiolo</a>
+          </div>
           <button class="remover-fav" title="Remover dos favoritos">✕</button>
         </li>
 

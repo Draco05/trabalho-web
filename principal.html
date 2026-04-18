@@ -4,46 +4,84 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Início — ReceitaFácil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="pagina-interna">
 
-    <header class="header">
-      <span class="logo">ReceitaFácil</span>
-      <nav>
-        <span style="color: var(--laranja-palido); font-size: 0.9rem;">Olá, <strong>Jacquin</strong></span>
-        <a href="login.html">Sair</a>
-      </nav>
-    </header>
+  <!-- HEADER -->
+  <header class="header">
+    <a href="principal.html" class="logo">
+     <img src="imgs/hat-chef-svgrepo-com.svg" class="logo-icon">
+      <span class="logo-name">ReceitaFácil</span>
+    </a>
+    <nav class="header-nav" aria-label="Navegação principal">
+      <span class="header-greeting">Olá, <strong>Jacquin</strong></span>
+      <a href="login.html" class="btn-sair">Sair</a>
+    </nav>
+  </header>
 
-    <main class="conteudo" style="display: flex; flex-direction: column; justify-content: center;">
-      <h1>O que você quer fazer?</h1>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <h1>O que vamos<br>cozinhar <em>hoje?</em></h1>
       <p>Navegue pelas opções abaixo para gerenciar sua conta e encontrar receitas.</p>
-
-      <div class="hub-grade">
-
-        <a href="perfil.html" class="hub-card">
-          <span class="icone">👤</span>
-          <h3>Meu perfil</h3>
-          <p>Veja seus dados e gerencie sua conta</p>
-        </a>
-
-        <a href="buscar-receita.html" class="hub-card">
-          <span class="icone">🔍</span>
-          <h3>Buscar receita</h3>
-          <p>Informe os ingredientes que você tem e receba sugestões</p>
-        </a>
-
-        <a href="minhas-receitas.html" class="hub-card">
-          <span class="icone">⭐</span>
-          <h3>Minhas receitas</h3>
-          <p>Acesse rapidamente suas receitas favoritas</p>
-        </a>
-
-      </div>
-    </main>
-
+    </div>
   </div>
+
+  <!-- MAIN -->
+  <main class="conteudo">
+    <p class="section-label">O que você quer fazer?</p>
+
+    <div class="hub-grade">
+
+      <a href="perfil.html" class="hub-card">
+        <div class="card-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <h3>Meu perfil</h3>
+        <p>Veja seus dados e gerencie sua conta</p>
+        <div class="card-arrow">
+          Ver perfil
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <a href="buscar-receita.html" class="hub-card">
+        <div class="card-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21l-4.35-4.35"/>
+          </svg>
+        </div>
+        <h3>Buscar receita</h3>
+        <p>Informe os ingredientes que você tem e receba sugestões</p>
+        <div class="card-arrow">
+          Buscar agora
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <a href="minhas-receitas.html" class="hub-card">
+        <div class="card-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        <h3>Minhas receitas</h3>
+        <p>Acesse rapidamente suas receitas favoritas</p>
+        <div class="card-arrow">
+          Ver favoritas
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+    </div>
+  </main>
+
 </body>
 </html>
