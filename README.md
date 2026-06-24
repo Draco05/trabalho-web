@@ -6,6 +6,12 @@ Muitas vezes, não temos comida suficiente em casa para preparar a refeição qu
 
 Nesse contexto, o nosso site supre uma necessidade importante: ele permite que usuários busquem receitas específicas com base nos ingredientes e quantidades que eles inserirem, permitindo que eles vejam detalhes (todos os ingredientes, modo de preparo, imagem) das receitas recomendadas.
 
+## Como rodar o projeto 
+Com o docker instalado, para rodar o projeto basta executar o seguinte comando na pasta principal do repositório:
+```
+docker compose up --build
+```
+
 ## Integrantes do grupo:
     Lucas Dúckur Nunes Andreolli            N°USP: 15471518
     Caio Draco Araujo Albuquerque Galvão    N°USP: 15573731
