@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editar Receita — ReceitaFácil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .preview-imagem {
+      width: 100%;
+      max-height: 240px;
+      object-fit: cover;
+      border-radius: var(--raio);
+      border: 1px solid var(--borda);
+      margin-top: 0.75rem;
+      display: none;
+    }
+    .upload-area {
+      border: 2px dashed var(--borda);
+      border-radius: var(--raio);
+      padding: 1.5rem;
+      text-align: center;
+      color: var(--texto-suave);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .upload-area:hover { border-color: var(--laranja-medio); }
+    .secao-dinamica { margin-top: 2rem; }
+    .secao-dinamica h2 { font-size: 1.1rem; margin-bottom: 1rem; }
+    .form-linha {
+      display: grid;
+      grid-template-columns: 2fr 1fr auto;
+      gap: 0.75rem;
+      align-items: end;
+      margin-bottom: 1rem;
+    }
+    .form-linha-etapa {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.75rem;
+      align-items: end;
+      margin-bottom: 1rem;
+    }
+    .lista-dinamica {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .item-dinamico {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--fundo);
+      border: 1px solid var(--borda);
+      border-radius: var(--raio-btn);
+      padding: 0.65rem 1rem;
+      font-size: 0.9rem;
+    }
+    .item-dinamico .item-info { flex: 1; }
+    .item-dinamico .item-nome { font-weight: 600; color: var(--texto); }
+    .item-dinamico .item-detalhe { font-size: 0.85rem; color: var(--texto-suave); }
+    .item-dinamico .numero-etapa {
+      background: var(--laranja-palido);
+      color: var(--laranja-escuro);
+      border-radius: 50%;
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700; flex-shrink: 0;
+    }
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    #conteudo-edicao { display: none; }
+    @media (max-width: 640px) {
+      .form-linha { grid-template-columns: 1fr; }
+      .form-linha .btn { width: 100%; }
+      .form-linha-etapa { grid-template-columns: 1fr; }
+      .form-grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="pagina-interna">
+
+    <header class="header">
+      <a href="principal.html" class="logo">
+        <img src="imgs/hat-chef-svgrepo-com.svg" class="logo-icon">
+        <span class="logo-name">ReceitaFácil</span>
+      </a>
+      <nav class="header-nav" aria-label="Navegação principal">
+        <a href="principal.html" class="header-link">Início</a>
+        <a href="buscar-receita.html" class="header-link">Buscar receita</a>
+        <a href="minhas-receitas.html" class="header-link">Minhas receitas</a>
+        <a href="login.html" class="btn-sair">Sair</a>
+      </nav>
+    </header>
+
+    <main class="conteudo">
+
+      <div style="margin-bottom: 1.5rem;">
+        <a href="minhas-receitas.html" style="font-size: 0.88rem; color: var(--texto-suave);">
+          ← Voltar para Minhas Receitas
+        </a>
+      </div>
+
+      <h1>Editar Receita</h1>
+      <p>Atualize as informações da sua receita.</p>
+
+      <!-- Estado de erro ao carregar -->
+      <div class="mensagem-erro" id="msg-erro-carregar" style="display: none; margin-top: 1rem;"></div>
+
+      <!-- Mensagens de validação / sucesso -->
+      <div id="mensagem-global" class="mensagem-erro" style="display: none; margin-top: 1rem;"></div>
+      <div id="mensagem-sucesso" class="mensagem-sucesso" style="display: none; margin-top: 1rem;"></div>
+
+      <div id="conteudo-edicao">
+
+        <!-- DADOS BÁSICOS -->
+        <div class="card" style="margin-top: 1.5rem;">
+          <h2 style="font-size: 1.1rem; margin-bottom: 1.25rem;">Informações básicas</h2>
+
+          <div class="form-grupo">
+            <label for="nome-receita">Nome da receita <span style="color: var(--erro);">*</span></label>
+            <input type="text" id="nome-receita" placeholder="Ex: Bolo de chocolate da vovó" />
+            <div class="mensagem-erro" id="erro-nome" style="display: none; margin-top: 0.4rem; margin-bottom: 0;"></div>
+          </div>
+
+          <div class="form-grupo">
+            <label for="descricao-receita">Descrição <span style="color: var(--erro);">*</span></label>
+            <textarea id="descricao-receita" rows="3" placeholder="Descreva brevemente sua receita..." style="resize: vertical;"></textarea>
+            <div class="mensagem-erro" id="erro-descricao" style="display: none; margin-top: 0.4rem; margin-bottom: 0;"></div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-grupo">
+              <label for="tempo-preparo">Tempo de preparo (minutos)</label>
+              <input type="number" id="tempo-preparo" placeholder="Ex: 45" min="1" />
+            </div>
+            <div class="form-grupo">
+              <label for="porcoes">Número de porções</label>
+              <input type="number" id="porcoes" placeholder="Ex: 4" min="1" />
+            </div>
+          </div>
+
+          <div class="form-grupo">
+            <label for="categoria">Categoria</label>
+            <select id="categoria">
+              <option value="">Selecione uma categoria</option>
+              <option value="Entrada">Entrada</option>
+              <option value="Prato Principal">Prato Principal</option>
+              <option value="Sobremesa">Sobremesa</option>
+              <option value="Lanche">Lanche</option>
+              <option value="Bebida">Bebida</option>
+            </select>
+          </div>
+
+          <div class="form-grupo">
+            <label>Imagem da receita</label>
+            <label for="imagem-receita" class="upload-area" id="label-upload">
+              📷 Clique para escolher uma imagem
+            </label>
+            <input type="file" id="imagem-receita" accept="image/*" style="display: none;" />
+            <img id="preview-imagem" class="preview-imagem" alt="Preview da receita" />
+          </div>
+        </div>
+
+        <!-- INGREDIENTES -->
+        <div class="card secao-dinamica">
+          <h2>Ingredientes <span style="color: var(--erro);">*</span></h2>
+
+          <div class="form-linha">
+            <div class="form-grupo" style="margin-bottom: 0;">
+              <label for="ing-nome">Ingrediente</label>
+              <input type="text" id="ing-nome" placeholder="Ex: farinha de trigo" />
+            </div>
+            <div class="form-grupo" style="margin-bottom: 0;">
+              <label for="ing-qtd">Quantidade</label>
+              <input type="text" id="ing-qtd" placeholder="Ex: 2 xícaras" />
+            </div>
+            <button class="btn btn-secundario" id="btn-add-ingrediente">+ Adicionar</button>
+          </div>
+
+          <div class="mensagem-erro" id="erro-ingrediente" style="display: none; margin-bottom: 0.75rem;"></div>
+          <div class="mensagem-erro" id="erro-lista-ingredientes" style="display: none; margin-bottom: 0.75rem;"></div>
+
+          <ul class="lista-dinamica" id="lista-ingredientes"></ul>
+          <div class="ingredientes-vazio" id="vazio-ingredientes">
+            Nenhum ingrediente adicionado ainda.
+          </div>
+        </div>
+
+        <!-- MODO DE PREPARO -->
+        <div class="card secao-dinamica">
+          <h2>Modo de preparo <span style="color: var(--erro);">*</span></h2>
+
+          <div class="form-linha-etapa">
+            <div class="form-grupo" style="margin-bottom: 0;">
+              <label for="etapa-descricao">Descrição da etapa</label>
+              <input type="text" id="etapa-descricao" placeholder="Ex: Pré-aqueça o forno a 180°C" />
+            </div>
+            <button class="btn btn-secundario" id="btn-add-etapa">+ Adicionar</button>
+          </div>
+
+          <div class="mensagem-erro" id="erro-etapa" style="display: none; margin-bottom: 0.75rem;"></div>
+          <div class="mensagem-erro" id="erro-lista-etapas" style="display: none; margin-bottom: 0.75rem;"></div>
+
+          <ul class="lista-dinamica" id="lista-etapas"></ul>
+          <div class="ingredientes-vazio" id="vazio-etapas">
+            Nenhuma etapa adicionada ainda.
+          </div>
+        </div>
+
+        <!-- SALVAR -->
+        <div style="margin-top: 2rem; margin-bottom: 3rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn btn-primario" id="btn-salvar" style="max-width: 280px;">Salvar Alterações</button>
+          <a href="minhas-receitas.html" class="btn btn-secundario" style="max-width: 180px;">Cancelar</a>
+        </div>
+
+      </div><!-- /conteudo-edicao -->
+    </main>
+  </div>
+    <script src="js/storage.js"></script>
+    <script src="js/editar-receita.js"></script>
+</body>
+</html>

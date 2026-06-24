@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Receita — ReceitaFácil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .badge-categoria {
+      display: inline-block;
+      background: var(--laranja-palido);
+      color: var(--laranja-escuro);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    .receita-meta {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-size: 0.88rem;
+      color: var(--texto-suave);
+      margin-bottom: 1.25rem;
+    }
+    .receita-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .receita-imagem-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: var(--raio);
+      border: 1px solid var(--borda);
+      background: var(--laranja-palido);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--laranja-claro);
+      font-size: 4rem;
+    }
+    .acoes-receita {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    #conteudo-receita { display: none; }
+  </style>
+</head>
+<body>
+  <div class="pagina-interna">
+
+    <header class="header">
+      <a href="principal.html" class="logo">
+        <img src="imgs/hat-chef-svgrepo-com.svg" class="logo-icon">
+        <span class="logo-name">ReceitaFácil</span>
+      </a>
+      <nav class="header-nav" aria-label="Navegação principal">
+        <a href="principal.html" class="header-link">Início</a>
+        <a href="buscar-receita.html" class="header-link">Buscar receita</a>
+        <a href="minhas-receitas.html" class="header-link">Minhas receitas</a>
+        <a href="login.html" class="btn-sair">Sair</a>
+      </nav>
+    </header>
+
+    <main class="conteudo">
+
+      <div style="margin-bottom: 1.5rem;">
+        <a href="minhas-receitas.html" style="font-size: 0.88rem; color: var(--texto-suave);">
+          ← Voltar para Minhas Receitas
+        </a>
+      </div>
+
+      <!-- Estado de erro / não encontrado -->
+      <div class="mensagem-erro" id="msg-erro" style="display: none;"></div>
+
+      <!-- Conteúdo da receita (preenchido pelo JS) -->
+      <div id="conteudo-receita">
+
+        <!-- Cabeçalho: imagem + info -->
+        <div class="receita-header">
+
+          <!-- Imagem -->
+          <div id="wrapper-imagem">
+            <!-- substituído pelo JS: img ou placeholder -->
+          </div>
+
+          <!-- Info lateral -->
+          <div class="receita-info">
+            <div id="badge-categoria" class="badge-categoria" style="display: none;"></div>
+            <h1 id="receita-nome"></h1>
+            <p id="receita-descricao"></p>
+
+            <div class="receita-meta" id="receita-meta"></div>
+
+            <div class="acoes-receita">
+              <a id="btn-editar" href="#" class="btn btn-secundario btn-pequeno" style="width: auto;">
+                ✏️ Editar receita
+              </a>
+              <button id="btn-excluir" class="btn btn-perigo btn-pequeno" style="width: auto;">
+                🗑️ Excluir receita
+              </button>
+            </div>
+
+            <!-- Ingredientes na barra lateral -->
+            <h3 style="margin-bottom: 0.6rem;">Ingredientes</h3>
+            <ul class="receita-ingredientes" id="lista-ingredientes"></ul>
+          </div>
+        </div>
+
+        <!-- Modo de preparo -->
+        <div class="card receita-preparo">
+          <h2>Modo de preparo</h2>
+          <ol id="lista-etapas" style="padding-left: 1.3rem; display: flex; flex-direction: column; gap: 0.75rem;"></ol>
+        </div>
+
+        <!-- Data de criação -->
+        <p style="margin-top: 1.25rem; font-size: 0.82rem; color: var(--texto-suave);" id="data-criacao"></p>
+
+      </div><!-- /conteudo-receita -->
+
+    </main>
+  </div>
+
+  <!-- Modal de confirmação de exclusão -->
+  <div id="modal-excluir" style="
+    display: none; position: fixed; inset: 0; z-index: 100;
+    background: rgba(42,37,32,0.55); align-items: center; justify-content: center;">
+    <div class="card" style="max-width: 380px; width: 90%; text-align: center;">
+      <h2 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Excluir receita?</h2>
+      <p style="margin-bottom: 1.5rem;">Esta ação não pode ser desfeita.</p>
+      <div style="display: flex; gap: 0.75rem; justify-content: center;">
+        <button class="btn btn-secundario" id="btn-cancelar-excluir" style="width: auto;">Cancelar</button>
+        <button class="btn btn-perigo" id="btn-confirmar-excluir" style="width: auto;">Excluir</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/minha-receita.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redefinir Senha — ReceitaFácil</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="pagina-centrada">
+    <div class="card-estreito">
+
+      <div class="card-titulo">
+        <h1>Redefinir senha</h1>
+        <p>Informe seu e-mail e enviaremos um link para redefinição</p>
+      </div>
+
+      <div class="mensagem-erro"   id="msg-erro"    style="display: none;"></div>
+      <div class="mensagem-sucesso" id="msg-sucesso" style="display: none;"></div>
+
+      <form id="form-redefinir">
+        <div class="form-grupo">
+          <label for="email">E-mail cadastrado</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="seu@email.com"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primario" id="btn-enviar">
+          Enviar link de redefinição
+        </button>
+      </form>
+
+      <div class="links-form">
+        <a href="login.html">Voltar ao login</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('form-redefinir').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      var msgErro    = document.getElementById('msg-erro');
+      var msgSucesso = document.getElementById('msg-sucesso');
+      var btnEnviar  = document.getElementById('btn-enviar');
+
+      msgErro.style.display    = 'none';
+      msgSucesso.style.display = 'none';
+      btnEnviar.disabled       = true;
+      btnEnviar.textContent    = 'Enviando...';
+
+      var email = document.getElementById('email').value.trim();
+
+      try {
+        var resp = await fetch('/api/auth/redefinir-senha', {
+          method:      'POST',
+          credentials: 'include',
+          headers:     { 'Content-Type': 'application/json' },
+          body:        JSON.stringify({ email }),
+        });
+
+        var dados = await resp.json();
+
+        if (!resp.ok) {
+          msgErro.textContent   = dados.erro || 'Erro ao solicitar redefinição.';
+          msgErro.style.display = 'block';
+          return;
+        }
+
+        msgSucesso.textContent   = 'Se este e-mail estiver cadastrado, você receberá o link em breve.';
+        msgSucesso.style.display = 'block';
+        document.getElementById('form-redefinir').style.display = 'none';
+
+      } catch (err) {
+        msgErro.textContent   = 'Não foi possível conectar ao servidor.';
+        msgErro.style.display = 'block';
+      } finally {
+        btnEnviar.disabled    = false;
+        btnEnviar.textContent = 'Enviar link de redefinição';
+      }
+    });
+  </script>
+</body>
+</html>

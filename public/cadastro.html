@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criar Conta — ReceitaFácil</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="pagina-centrada">
+    <div class="card-estreito">
+
+      <div class="card-titulo">
+        <h1>Criar conta</h1>
+        <p>Preencha os dados abaixo para se cadastrar</p>
+      </div>
+
+      <div class="mensagem-erro" id="msg-erro" style="display: none;"></div>
+
+      <form id="form-cadastro">
+        <div class="form-grupo">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Ex: Jacquin"
+            autocomplete="username"
+            required
+          />
+        </div>
+
+        <div class="form-grupo">
+          <label for="email">E-mail</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="seu@email.com"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <div class="form-grupo">
+          <label for="senha">Senha</label>
+          <input
+            type="password"
+            id="senha"
+            name="senha"
+            placeholder="Mínimo 6 caracteres"
+            autocomplete="new-password"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primario" id="btn-criar">Criar conta</button>
+      </form>
+
+      <div class="links-form">
+        <span>Já tem uma conta? <a href="login.html">Fazer login</a></span>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('form-cadastro').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      var msgErro  = document.getElementById('msg-erro');
+      var btnCriar = document.getElementById('btn-criar');
+
+      msgErro.style.display = 'none';
+      btnCriar.disabled     = true;
+      btnCriar.textContent  = 'Criando...';
+
+      var username = document.getElementById('username').value.trim();
+      var email    = document.getElementById('email').value.trim();
+      var senha    = document.getElementById('senha').value;
+
+      try {
+        var resp = await fetch('/api/auth/cadastro', {
+          method:      'POST',
+          credentials: 'include',
+          headers:     { 'Content-Type': 'application/json' },
+          body:        JSON.stringify({ username, email, senha }),
+        });
+
+        var dados = await resp.json();
+
+        if (!resp.ok) {
+          msgErro.textContent   = dados.erro || 'Erro ao criar conta.';
+          msgErro.style.display = 'block';
+          return;
+        }
+
+        // Cadastro OK (já loga automaticamente) — vai para a página principal
+        window.location.href = 'principal.html';
+
+      } catch (err) {
+        msgErro.textContent   = 'Não foi possível conectar ao servidor.';
+        msgErro.style.display = 'block';
+      } finally {
+        btnCriar.disabled    = false;
+        btnCriar.textContent = 'Criar conta';
+      }
+    });
+  </script>
+</body>
+</html>

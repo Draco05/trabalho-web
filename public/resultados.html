@@ -32,39 +32,22 @@
       <h1>Receitas encontradas</h1>
       <p id="subtitulo-resultados">Mostrando receitas com base nos seus ingredientes</p>
 
+      <!-- Filtros injetados pelo JS -->
+      <div id="painel-filtros" class="painel-filtros" style="margin-top: 1rem;"></div>
+
       <div id="mensagem-vazia" class="ingredientes-vazio" style="display: none; margin-top: 1.5rem;">
         Nenhuma receita encontrada com os ingredientes informados.<br />
         Tente adicionar mais ingredientes ou remover alguma restrição.
       </div>
 
-      <ul class="lista-receitas" id="lista-resultados" style="margin-top: 1.5rem;">
-
-        <!-- Exemplo de itens de resultado (simulado) -->
-        <li class="item-receita">
-          <a href="receita.html">Petit Gateau</a>
-          <span class="tag-match">✓ Match perfeito</span>
-          <img src="imgs/star-svgrepo-com.svg" class="icone-fav">
-        </li>
-
-        <li class="item-receita">
-          <a href="receita.html">Massa de Panqueca</a>
-          <img src="imgs/star-svgrepo-com.svg" class="icone-fav">
-        </li>
-
-        <li class="item-receita">
-          <a href="receita.html">Crepe de queijo</a>
-          <img src="imgs/star-svgrepo-com.svg" class="icone-fav">
-        </li>
-
-        <li class="item-receita">
-          <a href="receita.html">Omelete com legumes</a>
-          <img src="imgs/star-svgrepo-com.svg" class="icone-fav">
-        </li>
-
-      </ul>
+      <ul class="lista-receitas" id="lista-resultados" style="margin-top: 1.5rem; list-style: none;"></ul>
     </main>
 
   </div>
 
+  <script src="js/receitas-base.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/busca.js"></script>
+  <script src="js/resultados.js"></script>
 </body>
 </html>

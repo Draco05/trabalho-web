@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Receita — ReceitaFácil</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="pagina-interna">
+
+    <header class="header">
+      <a href="principal.html" class="logo">
+        <img src="imgs/hat-chef-svgrepo-com.svg" class="logo-icon">
+        <span class="logo-name">ReceitaFácil</span>
+      </a>
+      <nav class="header-nav" aria-label="Navegação principal">
+        <a href="principal.html" class="header-link">Início</a>
+        <a href="buscar-receita.html" class="header-link">Buscar receita</a>
+        <a href="minhas-receitas.html" class="header-link">Minhas receitas</a>
+        <a href="login.html" class="btn-sair">Sair</a>
+      </nav>
+    </header>
+
+    <main class="conteudo">
+
+      <div style="margin-bottom: 1.5rem;">
+        <a href="resultados.html" style="font-size: 0.88rem; color: var(--texto-suave);">
+          ← Voltar aos resultados
+        </a>
+      </div>
+
+      <!-- Estrutura mantida — preenchida pelo receita.js -->
+      <div class="receita-header">
+
+        <!-- Imagem (src substituído pelo JS) -->
+        <img class="receita-imagem" src="" alt="Foto da receita" />
+
+        <div class="receita-info">
+          <!-- badge de categoria inserido pelo JS antes do h1 -->
+          <h1>Carregando…</h1>
+          <p></p>
+
+          <button class="btn btn-secundario btn-pequeno" id="btn-favorito"
+            style="width: auto; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.4rem;">
+            <img src="imgs/star-svgrepo-com.svg">
+            Salvar nos favoritos
+          </button>
+
+          <ul class="receita-ingredientes" id="lista-ingredientes-receita"></ul>
+        </div>
+      </div>
+
+      <div class="card receita-preparo">
+        <h2>Modo de preparo</h2>
+        <ol id="lista-etapas-receita"></ol>
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="js/receitas-base.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/busca.js"></script>
+  <script src="js/receita.js"></script>
+</body>
+</html>

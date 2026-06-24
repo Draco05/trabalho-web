@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
+ 
   <!-- HEADER -->
   <header class="header">
     <a href="principal.html" class="logo">
@@ -16,7 +16,7 @@
       <span class="logo-name">ReceitaFácil</span>
     </a>
     <nav class="header-nav" aria-label="Navegação principal">
-      <span class="header-greeting">Olá, <strong>Jacquin</strong></span>
+      <span class="header-greeting">Olá, <strong id="usuario-nome">Carregando...</strong></span>
       <a href="login.html" class="btn-sair">Sair</a>
     </nav>
   </header>
@@ -73,9 +73,23 @@
           </svg>
         </div>
         <h3>Minhas receitas</h3>
-        <p>Acesse rapidamente suas receitas favoritas</p>
+        <p>Acesse rapidamente suas receitas favoritas e cadastradas</p>
         <div class="card-arrow">
-          Ver favoritas
+          Ver receitas
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <a href="cadastro-receita.html" class="hub-card">
+        <div class="card-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </div>
+        <h3>Cadastrar receita</h3>
+        <p>Adicione suas próprias receitas e contribua com o recomendador</p>
+        <div class="card-arrow">
+          Nova receita
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </div>
       </a>
@@ -83,5 +97,23 @@
     </div>
   </main>
 
+  <script src="js/receitas-base.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/busca.js"></script>
+  <script src="js/recomendacoes.js"></script>
+  <script>
+    // Carrega o nome do usuário do perfil e exibe na saudação
+    (function () {
+      RF.storage.obterPerfil()
+        .then(function (dados) {
+          var nomeUsuario = dados.username || 'Usuário';
+          document.getElementById('usuario-nome').textContent = nomeUsuario;
+        })
+        .catch(function (erro) {
+          console.error('Erro ao carregar perfil:', erro);
+          document.getElementById('usuario-nome').textContent = 'Usuário';
+        });
+    })();
+  </script>
 </body>
 </html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minhas Receitas — ReceitaFácil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .secao-titulo {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      margin: 2rem 0 1rem;
+    }
+    .secao-titulo h2 {
+      font-size: 1.25rem;
+    }
+    .secao-titulo .contador {
+      font-size: 0.82rem;
+      color: var(--texto-suave);
+      font-family: var(--fonte-corpo);
+      font-weight: 400;
+    }
+    /* Lista de receitas cadastradas */
+    .lista-cadastradas {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .item-receita-cadastrada {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1.2rem;
+      background: var(--branco);
+      border: 1px solid var(--borda);
+      border-radius: var(--raio);
+      box-shadow: var(--sombra-suave);
+      transition: box-shadow 0.2s;
+      flex-wrap: wrap;
+    }
+    .item-receita-cadastrada:hover {
+      box-shadow: var(--sombra-card);
+    }
+    .receita-cadastrada-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .receita-cadastrada-nome {
+      font-weight: 600;
+      color: var(--laranja-escuro);
+      font-size: 1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .receita-cadastrada-meta {
+      font-size: 0.82rem;
+      color: var(--texto-suave);
+      margin-top: 0.15rem;
+    }
+    .receita-cadastrada-acoes {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+    .atalho-cadastrar {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--laranja-medio);
+    }
+    .atalho-cadastrar:hover {
+      color: var(--laranja-escuro);
+    }
+    @media (max-width: 640px) {
+      .item-receita-cadastrada { flex-direction: column; align-items: flex-start; }
+      .receita-cadastrada-acoes { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="pagina-interna">
+
+    <header class="header">
+      <a href="principal.html" class="logo">
+        <img src="imgs/hat-chef-svgrepo-com.svg" class="logo-icon">
+        <span class="logo-name">ReceitaFácil</span>
+      </a>
+      <nav class="header-nav" aria-label="Navegação principal">
+        <a href="principal.html" class="header-link">Início</a>
+        <a href="buscar-receita.html" class="header-link">Buscar receita</a>
+        <a href="minhas-receitas.html" class="header-link">Minhas receitas</a>
+        <a href="login.html" class="btn-sair">Sair</a>
+      </nav>
+    </header>
+
+    <main class="conteudo">
+      <h1>Minhas receitas</h1>
+      <p>Suas receitas favoritas e as que você cadastrou, reunidas em um só lugar.</p>
+
+      <!-- ── SEÇÃO 1: FAVORITAS ─────────────────────────────── -->
+      <div class="secao-titulo">
+        <h2>Receitas favoritas</h2>
+      </div>
+
+      <div class="ingredientes-vazio" id="vazio-favoritos" style="display: none;">
+        Você ainda não salvou nenhuma receita como favorita.<br />
+        <a href="buscar-receita.html">Buscar receitas</a> e marque as que gostar!
+      </div>
+
+      <ul class="receitas-favoritas-lista" id="lista-favoritos">
+        <li>
+          <div style="flex: 1;">
+            <a href="receita.html">Petit Gateau</a>
+          </div>
+          <button class="remover-fav" title="Remover dos favoritos">✕</button>
+        </li>
+        <li>
+          <div style="flex: 1;">
+            <a href="receita.html">Lasanha à bolonhesa</a>
+          </div>
+          <button class="remover-fav" title="Remover dos favoritos">✕</button>
+        </li>
+        <li>
+          <div style="flex: 1;">
+            <a href="receita.html">Strogonoff de Carne</a>
+          </div>
+          <button class="remover-fav" title="Remover dos favoritos">✕</button>
+        </li>
+        <li>
+          <div style="flex: 1;">
+            <a href="receita.html">Hamburguer à pizzaiolo</a>
+          </div>
+          <button class="remover-fav" title="Remover dos favoritos">✕</button>
+        </li>
+      </ul>
+
+      <hr class="divisor" style="margin-top: 2.5rem;" />
+
+      <!-- ── SEÇÃO 2: CADASTRADAS ───────────────────────────── -->
+      <div class="secao-titulo">
+        <h2>Receitas cadastradas por mim</h2>
+        <span class="contador" id="contador-cadastradas"></span>
+      </div>
+
+      <div class="ingredientes-vazio" id="vazio-cadastradas" style="display: none;">
+        Você ainda não cadastrou nenhuma receita.<br />
+        <a href="cadastro-receita.html" class="atalho-cadastrar">
+          + Cadastrar minha primeira receita
+        </a>
+      </div>
+
+      <ul class="lista-cadastradas" id="lista-cadastradas"></ul>
+
+      <div id="area-cadastrar" style="margin-top: 1.25rem;">
+        <a href="cadastro-receita.html" class="btn btn-secundario" style="width: auto; display: inline-flex;">
+          + Cadastrar nova receita
+        </a>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Modal de confirmação de exclusão -->
+  <div id="modal-excluir" style="
+    display: none; position: fixed; inset: 0; z-index: 100;
+    background: rgba(42,37,32,0.55); align-items: center; justify-content: center;">
+    <div class="card" style="max-width: 400px; width: 90%; text-align: center;">
+      <h2 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Excluir receita?</h2>
+      <p style="margin-bottom: 1.5rem;" id="texto-modal-excluir">Esta ação não pode ser desfeita.</p>
+      <div style="display: flex; gap: 0.75rem; justify-content: center;">
+        <button class="btn btn-secundario" id="btn-cancelar-excluir" style="width: auto;">Cancelar</button>
+        <button class="btn btn-perigo" id="btn-confirmar-excluir" style="width: auto;">Excluir</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/receitas-base.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/favoritos.js"></script>
+  <script src="js/minhas-receitas.js"></script>
+</body>
+</html>

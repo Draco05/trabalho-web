@@ -1,0 +1,33 @@
+services:
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       receita_facil
+      POSTGRES_USER:     postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"          # expõe o banco localmente (opcional, útil para inspecionar com DBeaver/pgAdmin)
+    volumes:
+      - pg_data:/var/lib/postgresql/data   # persiste os dados entre reinicializações
+      - ./banco.sql:/docker-entrypoint-initdb.d/banco.sql  # roda o script na primeira vez
+
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST:          db          # nome do serviço acima, não "localhost"
+      DB_PORT:          5432
+      DB_NAME:          receita_facil
+      DB_USER:          postgres
+      DB_PASS:          postgres
+      SESSION_SECRET:   troque_por_uma_chave_secreta_longa
+      PORT:             3000
+    depends_on:
+      - db               # garante que o banco sobe antes do servidor
+
+volumes:
+  pg_data:

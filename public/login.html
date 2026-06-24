@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — ReceitaFácil</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="pagina-centrada">
+    <div class="card-estreito">
+
+      <div class="card-titulo">
+        <h1>ReceitaFácil</h1>
+        <p>Entre na sua conta para buscar receitas</p>
+      </div>
+
+      <div class="mensagem-erro" id="msg-erro" style="display: none;"></div>
+
+      <!-- sem action nem method: o submit é interceptado pelo JS -->
+      <form id="form-login">
+        <div class="form-grupo">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Seu username"
+            autocomplete="username"
+            required
+          />
+        </div>
+
+        <div class="form-grupo">
+          <label for="senha">Senha</label>
+          <input
+            type="password"
+            id="senha"
+            name="senha"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primario" id="btn-entrar">Entrar</button>
+      </form>
+
+      <div class="links-form">
+        <a href="cadastro.html">Criar conta</a>
+        <a href="redefinir-senha.html">Esqueci minha senha</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('form-login').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      var msgErro = document.getElementById('msg-erro');
+      var btnEntrar = document.getElementById('btn-entrar');
+
+      msgErro.style.display = 'none';
+      btnEntrar.disabled = true;
+      btnEntrar.textContent = 'Entrando...';
+
+      var username = document.getElementById('username').value.trim();
+      var senha    = document.getElementById('senha').value;
+
+      try {
+        var resp = await fetch('/api/auth/login', {
+          method:      'POST',
+          credentials: 'include',
+          headers:     { 'Content-Type': 'application/json' },
+          body:        JSON.stringify({ username, senha }),
+        });
+
+        var dados = await resp.json();
+
+        if (!resp.ok) {
+          msgErro.textContent    = dados.erro || 'Erro ao fazer login.';
+          msgErro.style.display  = 'block';
+          return;
+        }
+
+        // Login OK — redireciona para a página principal
+        window.location.href = 'principal.html';
+
+      } catch (err) {
+        msgErro.textContent   = 'Não foi possível conectar ao servidor.';
+        msgErro.style.display = 'block';
+      } finally {
+        btnEntrar.disabled    = false;
+        btnEntrar.textContent = 'Entrar';
+      }
+    });
+  </script>
+</body>
+</html>

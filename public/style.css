@@ -1036,3 +1036,488 @@ body .hub-grade>.hub-card .card-arrow {
     margin-left: 5rem;
   }
 }
+/* ──────────────────────────────────────────────────────────
+   RECEITAS CADASTRADAS (minhas-receitas.html + lista)
+   ────────────────────────────────────────────────────────── */
+
+/* Item da lista de receitas cadastradas pelo usuário */
+.item-receita-cadastrada {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.2rem;
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra-suave);
+  transition: box-shadow 0.2s;
+  flex-wrap: wrap;
+}
+
+.item-receita-cadastrada:hover {
+  box-shadow: var(--sombra-card);
+}
+
+.receita-cadastrada-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.receita-cadastrada-nome {
+  font-weight: 600;
+  color: var(--laranja-escuro);
+  font-size: 1rem;
+}
+
+.receita-cadastrada-meta {
+  font-size: 0.82rem;
+  color: var(--texto-suave);
+  margin-top: 0.15rem;
+}
+
+.receita-cadastrada-acoes {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+/* ──────────────────────────────────────────────────────────
+   CADASTRO / EDIÇÃO DE RECEITA
+   ────────────────────────────────────────────────────────── */
+
+/* Grid de 2 colunas para campos lado a lado */
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Linha de adição de ingrediente (3 colunas) */
+.form-linha {
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  gap: 0.75rem;
+  align-items: end;
+  margin-bottom: 1rem;
+}
+
+/* Linha de adição de etapa (2 colunas) */
+.form-linha-etapa {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem;
+  align-items: end;
+  margin-bottom: 1rem;
+}
+
+/* Lista dinâmica (ingredientes ou etapas no formulário) */
+.lista-dinamica {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Item genérico da lista dinâmica */
+.item-dinamico {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--fundo);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-btn);
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+}
+
+.item-dinamico .item-info     { flex: 1; }
+.item-dinamico .item-nome     { font-weight: 600; color: var(--texto); }
+.item-dinamico .item-detalhe  { font-size: 0.85rem; color: var(--texto-suave); }
+
+/* Círculo numerado para etapas */
+.item-dinamico .numero-etapa {
+  background: var(--laranja-palido);
+  color: var(--laranja-escuro);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Área de upload de imagem */
+.upload-area {
+  display: block;
+  border: 2px dashed var(--borda);
+  border-radius: var(--raio);
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.upload-area:hover {
+  border-color: var(--laranja-medio);
+}
+
+/* Preview da imagem da receita */
+.preview-imagem {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: var(--raio);
+  border: 1px solid var(--borda);
+  margin-top: 0.75rem;
+  display: none;
+}
+
+/* Seção dinâmica com espaçamento superior */
+.secao-dinamica {
+  margin-top: 2rem;
+}
+
+.secao-dinamica h2 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+/* Cabeçalho de seção com contador */
+.secao-titulo {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 2rem 0 1rem;
+}
+
+.secao-titulo h2  { font-size: 1.25rem; }
+.secao-titulo .contador {
+  font-size: 0.82rem;
+  color: var(--texto-suave);
+  font-family: var(--fonte-corpo);
+  font-weight: 400;
+}
+
+/* Badge de categoria na visualização */
+.badge-categoria {
+  display: inline-block;
+  background: var(--laranja-palido);
+  color: var(--laranja-escuro);
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+/* Meta da receita (tempo, porções) */
+.receita-meta {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-size: 0.88rem;
+  color: var(--texto-suave);
+  margin-bottom: 1.25rem;
+}
+
+/* Botões de ação na visualização */
+.acoes-receita {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+/* Placeholder de imagem não fornecida */
+.receita-imagem-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: var(--raio);
+  border: 1px solid var(--borda);
+  background: var(--laranja-palido);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--laranja-claro);
+  font-size: 4rem;
+}
+
+/* ── Responsividade adicional ───────────────────────────── */
+@media (max-width: 640px) {
+  .form-linha        { grid-template-columns: 1fr; }
+  .form-linha .btn   { width: 100%; }
+  .form-linha-etapa  { grid-template-columns: 1fr; }
+  .form-grid-2       { grid-template-columns: 1fr; }
+
+  .item-receita-cadastrada   { flex-direction: column; align-items: flex-start; }
+  .receita-cadastrada-acoes  { width: 100%; }
+}
+
+/* ──────────────────────────────────────────────────────────
+   MÓDULO DE BUSCA E RESULTADOS — classes novas
+   ────────────────────────────────────────────────────────── */
+
+/* Barra de score colorida */
+.score-bar-wrap {
+  background: var(--borda);
+  border-radius: 20px;
+  height: 6px;
+  margin: 0.35rem 0 0.6rem;
+  overflow: hidden;
+}
+.score-bar-fill {
+  height: 100%;
+  border-radius: 20px;
+  background: var(--laranja-medio);
+  transition: width 0.4s ease;
+}
+.score-bar-fill.alto  { background: #2d9e5f; }
+.score-bar-fill.medio { background: var(--laranja-medio); }
+.score-bar-fill.baixo { background: #c0392b; }
+
+/* Número do score em destaque */
+.score-numero {
+  font-family: var(--fonte-titulo);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--laranja-escuro);
+}
+.score-numero.alto  { color: #2d9e5f; }
+.score-numero.medio { color: var(--laranja-escuro); }
+.score-numero.baixo { color: #c0392b; }
+
+/* Card de resultado (substitui .item-receita simples) */
+.card-resultado {
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 1.25rem 1.4rem;
+  box-shadow: var(--sombra-suave);
+  transition: box-shadow 0.2s, transform 0.15s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.card-resultado:hover {
+  box-shadow: var(--sombra-card);
+  transform: translateY(-2px);
+}
+.card-resultado-topo {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.card-resultado-score {
+  flex-shrink: 0;
+  text-align: center;
+  min-width: 52px;
+}
+.card-resultado-score small {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--texto-suave);
+  margin-top: 0.1rem;
+}
+.card-resultado-info { flex: 1; }
+.card-resultado-info h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.2rem;
+  color: var(--laranja-escuro);
+}
+.card-resultado-info h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+.card-resultado-info h3 a:hover { text-decoration: underline; }
+.card-resultado-meta {
+  font-size: 0.82rem;
+  color: var(--texto-suave);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.3rem;
+}
+.card-resultado-desc {
+  font-size: 0.88rem;
+  color: var(--texto-suave);
+  line-height: 1.5;
+}
+
+/* Linha de detalhes de ingredientes */
+.resultado-ing-linha {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--borda);
+}
+.resultado-ing-linha .rotulo {
+  color: var(--texto-suave);
+  white-space: nowrap;
+}
+.resultado-ing-linha .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.chip {
+  display: inline-block;
+  border-radius: 20px;
+  padding: 2px 9px;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+.chip-ok       { background: #e6f4ec; color: #2d7a4f; }
+.chip-faltante { background: #fdecea; color: #c0392b; }
+.chip-vencendo { background: #fff3cd; color: #856404; }
+
+/* Alerta de validade */
+.alerta-validade {
+  font-size: 0.8rem;
+  color: #856404;
+  background: #fff3cd;
+  border-radius: var(--raio-btn);
+  padding: 4px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Painel de filtros */
+.painel-filtros {
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  align-items: flex-end;
+}
+.painel-filtros .form-grupo {
+  margin-bottom: 0;
+  min-width: 160px;
+}
+.painel-filtros label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.painel-filtros select {
+  padding: 0.45rem 0.75rem;
+  font-size: 0.88rem;
+}
+
+/* Tag de "vencendo" no item de ingrediente da lista */
+.val-ing.vencendo {
+  color: #856404;
+  font-weight: 700;
+}
+.val-ing.vencido {
+  color: var(--erro);
+  font-weight: 700;
+}
+
+/* Seção de histórico em perfil.html */
+.historico-lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+.historico-lista li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-btn);
+  background: var(--fundo);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.historico-lista li:hover {
+  background: var(--laranja-palido);
+}
+.historico-lista li .hist-termos {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--texto);
+}
+.historico-lista li .hist-data {
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+  white-space: nowrap;
+}
+
+/* Seção de recomendações em principal.html */
+.recomendacoes-grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.card-recomendacao {
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 1rem 1.1rem;
+  box-shadow: var(--sombra-suave);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  text-decoration: none;
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+.card-recomendacao:hover {
+  box-shadow: var(--sombra-card);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+.card-recomendacao .rec-nome {
+  font-family: var(--fonte-titulo);
+  font-size: 1rem;
+  color: var(--laranja-escuro);
+  font-weight: 600;
+}
+.card-recomendacao .rec-meta {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+.card-recomendacao .rec-badge {
+  display: inline-block;
+  margin-top: 0.25rem;
+  background: var(--laranja-palido);
+  color: var(--laranja-escuro);
+  border-radius: 20px;
+  padding: 2px 10px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  align-self: flex-start;
+}
+
+/* Favorito ativo */
+#btn-favorito.ativo {
+  background: var(--laranja-palido);
+  border-color: var(--laranja-medio);
+  color: var(--laranja-escuro);
+}
+
+@media (max-width: 640px) {
+  .painel-filtros { flex-direction: column; }
+  .painel-filtros .form-grupo { min-width: 100%; }
+  .card-resultado-topo { flex-direction: column; gap: 0.5rem; }
+  .card-resultado-score { display: flex; align-items: center; gap: 0.75rem; }
+  .recomendacoes-grade { grid-template-columns: 1fr 1fr; }
+}
