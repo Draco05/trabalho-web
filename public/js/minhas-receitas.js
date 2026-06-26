@@ -64,7 +64,7 @@
         (meta ? '<div class="receita-cadastrada-meta">' + escapeHtml(meta) + '</div>' : '') +
       '</div>' +
       '<div class="receita-cadastrada-acoes">' +
-        '<a href="receita.html?id=' + encodeURIComponent(receita.id) + '" ' +
+        '<a href="receita.html?id=' + encodeURIComponent(receita.id) + '&source=minhas-receitas" ' +
            'class="btn btn-secundario btn-pequeno" title="Visualizar receita">👁️ Ver</a>' +
         '<a href="editar-receita.html?id=' + encodeURIComponent(receita.id) + '" ' +
            'class="btn btn-secundario btn-pequeno" title="Editar receita">✏️ Editar</a>' +

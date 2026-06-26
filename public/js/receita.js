@@ -29,6 +29,38 @@
 
     renderReceita(receita);
     configurarFavorito(receita.id);
+    configurarBotaoVoltar();
+  }
+
+  // ── Botão Voltar (dinâmico) ─────────────────────────────
+  function configurarBotaoVoltar() {
+    var btnVoltar = document.getElementById('btn-voltar');
+    if (!btnVoltar) return;
+
+    var params = new URLSearchParams(window.location.search);
+    var source = params.get('source');
+
+    // Mapeia nomes curtos para as páginas reais
+    var paginas = {
+      'minhas-receitas': 'minhas-receitas.html',
+      'principal':       'principal.html',
+      'resultados':      'resultados.html',
+      'buscar-receita':  'buscar-receita.html'
+    };
+
+    if (source && paginas[source]) {
+      // Se veio com ?source=, redireciona para a página específica
+      btnVoltar.href = paginas[source];
+      btnVoltar.textContent = '← Voltar';
+    } else if (window.history.length > 1) {
+      // Sem query param, mas com histórico: usa history.back()
+      btnVoltar.href = '#';
+      btnVoltar.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.history.back();
+      });
+    }
+    // Caso contrário, mantém o href padrão (resultados.html)
   }
 
   // ── Renderizar ───────────────────────────────────────────
