@@ -132,7 +132,11 @@
 
       if (item.validade) {
         var partes = item.validade.split('-');
-        textoVal = 'Val: ' + (partes[1] || '') + '/' + (partes[0] || '');
+        if (partes.length === 3) {
+          textoVal = 'Val: ' + partes[2] + '/' + partes[1] + '/' + partes[0];
+        } else {
+          textoVal = 'Val: ' + (partes[1] || '') + '/' + (partes[0] || '');
+        }
         if      (dias === null) classeVal = '';
         else if (dias < 0)     classeVal = 'vencido';
         else if (dias <= 7)    classeVal = 'vencendo';

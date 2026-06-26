@@ -105,19 +105,28 @@
   // ══════════════════════════════════════════════════
 
   /**
-   * Converte string de validade (YYYY-MM) em dias restantes.
-   * A validade do tipo "YYYY-MM" assume o último dia do mês.
-   * @param {string} validade  "YYYY-MM" ou ISO date
+   * Converte string de validade em dias restantes.
+   * Formatos aceitos:
+   *   "YYYY-MM-DD" (input type=date — formato principal)
+   *   "YYYY-MM"    (input type=month — legado, assume último dia do mês)
+   * @param {string} validade
    * @returns {number|null}
    */
   function diasRestantes(validade) {
     if (!validade) return null;
 
     var data;
-    // Formato "YYYY-MM" (input type=month)
-    if (/^\d{4}-\d{2}$/.test(validade)) {
-      var partes = validade.split('-');
-      // Último dia do mês informado
+    var partes = validade.split('-');
+
+    if (partes.length === 3) {
+      // Formato "YYYY-MM-DD" (input type=date)
+      data = new Date(
+        parseInt(partes[0], 10),
+        parseInt(partes[1], 10) - 1,
+        parseInt(partes[2], 10)
+      );
+    } else if (partes.length === 2) {
+      // Formato "YYYY-MM" (legado — último dia do mês)
       data = new Date(parseInt(partes[0], 10), parseInt(partes[1], 10), 0);
     } else {
       data = new Date(validade);
@@ -234,12 +243,39 @@
       0.20 * scoreQuantidades  +
       0.10 * scoreValidadeFinal;
 
+    // ── Bônus de urgência (anti-desperdício) ──────────
+    // Receitas que usam ingredientes da dispensa próximos
+    // de vencer recebem um bônus de até 15 pontos.
+    // Usa o menor prazo de validade entre os ingredientes
+    // encontrados para calcular a urgência.
+    var menorDias = null;
+    encontrados.forEach(function (e) {
+      if (e.dias !== null && e.dias >= 0) {
+        if (menorDias === null || e.dias < menorDias) {
+          menorDias = e.dias;
+        }
+      }
+    });
+
+    var urgencyBonus = 0;
+    if (menorDias !== null) {
+      if      (menorDias <= 1)  urgencyBonus = 15;
+      else if (menorDias <= 3)  urgencyBonus = 12;
+      else if (menorDias <= 7)  urgencyBonus = 8;
+      else if (menorDias <= 15) urgencyBonus = 4;
+      else if (menorDias <= 30) urgencyBonus = 2;
+    }
+
+    scoreFinal = Math.min(100, scoreFinal + urgencyBonus);
+
     return {
       receita:              receita,
       scoreFinal:           Math.round(scoreFinal * 10) / 10,
       scoreIngredientes:    Math.round(scoreIngredientes * 10) / 10,
       scoreQuantidades:     Math.round(scoreQuantidades * 10) / 10,
       scoreValidade:        Math.round(scoreValidadeFinal * 10) / 10,
+      urgencyBonus:         urgencyBonus,
+      menorDiasValidade:    menorDias,
       numEncontrados:       numEncontrados,
       totalIngredientes:    totalIng,
       numFaltantes:         faltantes.length,
@@ -298,14 +334,18 @@
     });
 
     // ── Ordenação ────────────────────────────────────
-    // 1. Score final (maior primeiro)
-    // 2. Score de validade (desempate — prioriza anti-desperdício)
-    // 3. Menos faltantes
-    // 4. Menor tempo de preparo
+    // 1. Score final (maior primeiro — já inclui o bônus de urgência)
+    // 2. Bônus de urgência (desempate — prioriza anti-desperdício)
+    // 3. Menor prazo de validade (ingrediente mais urgente primeiro)
+    // 4. Menos faltantes
+    // 5. Menor tempo de preparo
     resultados.sort(function (a, b) {
-      if (b.scoreFinal !== a.scoreFinal)     return b.scoreFinal - a.scoreFinal;
-      if (b.scoreValidade !== a.scoreValidade) return b.scoreValidade - a.scoreValidade;
-      if (a.numFaltantes !== b.numFaltantes) return a.numFaltantes - b.numFaltantes;
+      if (b.scoreFinal !== a.scoreFinal)         return b.scoreFinal - a.scoreFinal;
+      if (b.urgencyBonus !== a.urgencyBonus)     return b.urgencyBonus - a.urgencyBonus;
+      var da = a.menorDiasValidade !== null ? a.menorDiasValidade : 9999;
+      var db = b.menorDiasValidade !== null ? b.menorDiasValidade : 9999;
+      if (da !== db)                             return da - db;
+      if (a.numFaltantes !== b.numFaltantes)     return a.numFaltantes - b.numFaltantes;
       return (a.receita.tempoPreparo || 999) - (b.receita.tempoPreparo || 999);
     });
 
@@ -350,9 +390,12 @@
     });
 
     resultados.sort(function (a, b) {
-      if (b.scoreFinal !== a.scoreFinal)       return b.scoreFinal - a.scoreFinal;
-      if (b.scoreValidade !== a.scoreValidade) return b.scoreValidade - a.scoreValidade;
-      if (a.numFaltantes !== b.numFaltantes)   return a.numFaltantes - b.numFaltantes;
+      if (b.scoreFinal !== a.scoreFinal)         return b.scoreFinal - a.scoreFinal;
+      if (b.urgencyBonus !== a.urgencyBonus)     return b.urgencyBonus - a.urgencyBonus;
+      var da = a.menorDiasValidade !== null ? a.menorDiasValidade : 9999;
+      var db = b.menorDiasValidade !== null ? b.menorDiasValidade : 9999;
+      if (da !== db)                             return da - db;
+      if (a.numFaltantes !== b.numFaltantes)     return a.numFaltantes - b.numFaltantes;
       var ta = a.receita.tempo_preparo || a.receita.tempoPreparo || 999;
       var tb = b.receita.tempo_preparo || b.receita.tempoPreparo || 999;
       return ta - tb;
